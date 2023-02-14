@@ -21,13 +21,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MovePlayer();
+        ConstrainPlayerPosition();
+
+    }
+
+    //Arrow input to move
+    void MovePlayer()
+    {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
         transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
         transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
-        
-        if (transform.position.x < -xRange)
+
+    }
+    
+    //Don't fall off the edge
+    void ConstrainPlayerPosition()
+    {
+                if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
@@ -45,5 +58,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
         }
+
     }
 }
