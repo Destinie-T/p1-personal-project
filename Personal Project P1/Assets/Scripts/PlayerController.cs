@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
 
-    public float speed = 20.0f;
+    private float speed = 10.0f;
+    private float turnSpeed = 120.0f;
     
     private float horizontalInput;
     private float verticalInput;
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
+        transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput);
 
     }
     
