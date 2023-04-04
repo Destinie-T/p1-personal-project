@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
+    public GameObject HoldCan;
 
     private float speed = 10.0f;
     private float turnSpeed = 120.0f;
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
     private float xRange = 19.0f;
     private float zRange = 19.0f;
+
+    public bool hasCan = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +29,23 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         ConstrainPlayerPosition();
+        if (Input.GetMouseButtonDown (0)) 
+        {  
+            print ("The Left mouse button was pressed");  
+        }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Can"))         //Checks tag of object and if player doesn't have powerup
+        {
+            hasCan = true;              //Player has powerup
+            Destroy(other.gameObject);      //Destroy powerup object
+
+            HoldCan.gameObject.SetActive(true);        //Indicator is visible in-game
+            
+        }
     }
 
     //Arrow input to move
