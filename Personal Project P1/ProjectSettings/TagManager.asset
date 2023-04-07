@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Can
+  - Plant
   layers:
   - Default
   - TransparentFX

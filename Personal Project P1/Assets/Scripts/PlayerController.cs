@@ -29,26 +29,22 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         ConstrainPlayerPosition();
-        if (Input.GetMouseButtonDown (0)) 
-        {  
-            print ("The Left mouse button was pressed");  
-        }
-
+       
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Can"))         //Checks tag of object and if player doesn't have powerup
+        if (other.CompareTag("Can"))            //Checks tag of object and if player doesn't have powerup
         {
-            hasCan = true;              //Player has powerup
-            Destroy(other.gameObject);      //Destroy powerup object
+            hasCan = true;                      //Player has powerup
+            Destroy(other.gameObject);          //Destroy powerup object
 
             HoldCan.gameObject.SetActive(true);        //Indicator is visible in-game
             
         }
     }
 
-    //Arrow input to move
+    // Up/down/left/right input to move
     void MovePlayer()
     {
         horizontalInput = Input.GetAxis("Horizontal");
