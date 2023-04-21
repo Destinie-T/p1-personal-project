@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody playerRb;
-    public GameObject HoldCan;
+    private Rigidbody playerRb;                 //player's rigidbody
+    public GameObject HoldCan;                  //The can in the game on the floor
 
-    private float speed = 10.0f;
-    private float turnSpeed = 120.0f;
+    private float speed = 10.0f;                //How fast the player moves
+    private float turnSpeed = 120.0f;           //How fast the player turns
     
-    private float horizontalInput;
-    private float verticalInput;
+    private float horizontalInput;              //Left/right input number to calculate
+    private float verticalInput;                //Up/down input to calculate
 
-    private float xRange = 19.0f;
-    private float zRange = 19.0f;
+    private float xRange = 19.0f;               //area on x-axis where player can move around
+    private float zRange = 19.0f;               //area on z-axis where player can move around
 
     public bool hasCan = false;
 
@@ -25,21 +25,21 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        MovePlayer();
-        ConstrainPlayerPosition();
+        MovePlayer();                                   //Call MovePlayer void, way to keep update clean
+        ConstrainPlayerPosition();                      //Call Constrain... so player doesn't fall
        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Can"))            //Checks tag of object and if player doesn't have powerup
+        if (other.CompareTag("Can"))                    //Checks tag of object and if player doesn't have can
         {
-            hasCan = true;                      //Player has powerup
-            Destroy(other.gameObject);          //Destroy powerup object
+            hasCan = true;                              //Player has can
+            Destroy(other.gameObject);                  //Destroy large can object
 
-            HoldCan.gameObject.SetActive(true);        //Indicator is visible in-game
+            HoldCan.gameObject.SetActive(true);         //Minican is visible in-game
             
         }
     }
@@ -50,15 +50,17 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
-        transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);      //Move with up/down input
+        transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput);        //Turn with left/right input
 
     }
     
-    //Don't fall off the edge
+    //Don't fall off the edge, all boundaries for the player
     void ConstrainPlayerPosition()
     {
-                if (transform.position.x < -xRange)
+        //If x or z value is less than range given, then stop the player from falling!
+
+        if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
