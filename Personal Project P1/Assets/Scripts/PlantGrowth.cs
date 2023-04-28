@@ -4,39 +4,52 @@ using UnityEngine;
 
 public class PlantGrowth : MonoBehaviour
 {
-
-    Renderer ren;                               //mesh renderer of the plant
-
-    private float amITimer = 5.0f;              //5 sec countdown
-
+    private int live = 50;
+    private int nextUpdate = 3;
+ 
     // Start is called before the first frame update
     void Start()
     {
-        ren = GetComponent<Renderer>();         //get mesh renderer of plant sphere
-
+       Debug.Log("Live = " + live);
     }
 
     // Update is called once per frame
-    public void Update()
+    void Update()
     {
-        //maybe find a better way to check if player has can?
-            
-
-    }
-    
-    //start countdown to see if player is there for long enough (ideally), for now its just the watering one again
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Front"))
+        if(Time.time>=nextUpdate)                           //if next update is reached
         {
-            StartCoroutine(AmICountdownRoutine());
+            Debug.Log(Time.time+">="+nextUpdate);
+            nextUpdate = Mathf.FloorToInt(Time.time)+3;      //Change next update (current second + 5)
+            Decay();                                        //Call function
         }
+
+        if (live > 70)
+        {
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+        }
+        else if (live < 20)
+        {
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        }
+        
+        if (live < 1)
+        {
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
+        }
+    }
     
-    }
-    IEnumerator AmICountdownRoutine()
+    public void Growth()
     {
-        yield return new WaitForSeconds(amITimer);          //waters for set amount of time
-        ren.material.color = Color.blue;                    //turns plant from red to blue
+        live++;
+        Debug.Log("Live =" + live);
     }
+
+    //Now called once per 3 second
+    public void Decay()
+    {
+        live--;
+        Debug.Log("Live =" + live);
+    }
+ 
 
 }
