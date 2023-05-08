@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     public bool hasCan = false;
 
+    private int water = 100;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);                  //Destroy large can object
 
             HoldCan.gameObject.SetActive(true);         //Minican is visible in-game
-            
+            Debug.Log("Water =" + water);
         }
     }
 

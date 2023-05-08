@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
+    private int water;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class Water : MonoBehaviour
         if (collider.CompareTag("Plant") && (Input.GetKey(KeyCode.F)))
         {
             collider.gameObject.GetComponent<PlantGrowth>().Growth();
+            water--;
         }
 
     }
