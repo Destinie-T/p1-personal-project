@@ -26,8 +26,10 @@ public class PlantGrowth : MonoBehaviour
         if (live > 70)
         {
             gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+        } else {
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
         }
-        else if (live < 20)
+        if (live < 20)
         {
             gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         }

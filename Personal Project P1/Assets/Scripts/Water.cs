@@ -22,7 +22,7 @@ public class Water : MonoBehaviour
     private void OnTriggerStay(Collider collider)
     {
 
-        if (collider.CompareTag("Plant") && (Input.GetKey(KeyCode.F)))
+        if (collider.CompareTag("Plant") && (Input.GetKey(KeyCode.Space)))
         {
             collider.gameObject.GetComponent<PlantGrowth>().Growth();
             water--;
