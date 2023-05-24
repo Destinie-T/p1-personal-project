@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;                 //player's rigidbody
     public GameObject HoldCan;                  //The can in the game on the floor
+    
 
     private float speed = 10.0f;                //How fast the player moves
     private float turnSpeed = 120.0f;           //How fast the player turns
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);                  //Destroy large can object
 
             HoldCan.gameObject.SetActive(true);         //Minican is visible in-game
-            Debug.Log("Water =" + water);
+            Debug.Log("Water = " + water);
         }
     }
 

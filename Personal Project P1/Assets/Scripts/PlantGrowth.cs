@@ -4,17 +4,36 @@ using UnityEngine;
 
 public class PlantGrowth : MonoBehaviour
 {
-    private int live = 50;
+    private int live = 30;
     private int nextUpdate = 3;
+    public GameObject alivePlant;
+    public GameObject grownPlant;
+    public GameObject deadPlant;
+
+    private GameManager gameManager;
+
+    private float goodLife = 50.0f;
+    private float overWatered = 150.0f;
+    
  
     // Start is called before the first frame update
     void Start()
     {
+       gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
        Debug.Log("Live = " + live);
     }
 
     // Update is called once per frame
     void Update()
+    {
+        if (gameManager.isGameActive)
+        {
+            PlantState();
+        }
+    }
+
+    public void PlantState()
     {
         if(Time.time>=nextUpdate)                           //if next update is reached
         {
@@ -23,9 +42,27 @@ public class PlantGrowth : MonoBehaviour
             Decay();                                        //Call function
         }
 
-        if (live > 70)
+        if (live > goodLife)
+        {  
+            alivePlant.gameObject.SetActive(false);
+            grownPlant.gameObject.SetActive(true);
+        } else {
+            alivePlant.gameObject.SetActive(true);
+            grownPlant.gameObject.SetActive(false);
+        }
+        
+        if (live < 1)
         {
-            transform.localScale = new Vector3(transform.localScale.x, 2f, transform.localScale.z);
+            alivePlant.gameObject.SetActive(false);
+            deadPlant.gameObject.SetActive(true);
+            live = -400;
+
+        } else if (live > overWatered)
+        {
+            alivePlant.gameObject.SetActive(false);
+            grownPlant.gameObject.SetActive(false);
+            deadPlant.gameObject.SetActive(true);
+            live = -400;
         }
     }
     
