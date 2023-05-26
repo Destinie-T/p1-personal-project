@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameObject.Find("Player").GetComponent<PlayerController>().enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.gameObject.SetActive(true);
         startingTint.gameObject.SetActive(true);
         GameObject.Find("Player").GetComponent<PlayerController>().enabled = false;
+        GameObject.Find("Plant").GetComponent<PlantGrowth>().enabled = false;
     }
 
 

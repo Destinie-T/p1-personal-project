@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlantGrowth : MonoBehaviour
 {
-    private int live = 30;
+    private float live = 30;
     private int nextUpdate = 3;
     public GameObject alivePlant;
     public GameObject grownPlant;
@@ -21,7 +21,7 @@ public class PlantGrowth : MonoBehaviour
     {
        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
-       Debug.Log("Live = " + live);
+       //Debug.Log("Live = " + live);
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class PlantGrowth : MonoBehaviour
     {
         if(Time.time>=nextUpdate)                           //if next update is reached
         {
-            Debug.Log(Time.time+">="+nextUpdate);
+            //Debug.Log(Time.time+">="+nextUpdate);
             nextUpdate = Mathf.FloorToInt(Time.time)+3;      //Change next update (current second + 5)
             Decay();                                        //Call function
         }
@@ -68,7 +68,7 @@ public class PlantGrowth : MonoBehaviour
     
     public void Growth()
     {
-        live++;
+        live += 35f * Time.deltaTime;
         Debug.Log("Live =" + live);
     }
 
@@ -76,7 +76,7 @@ public class PlantGrowth : MonoBehaviour
     public void Decay()
     {
         live--;
-        Debug.Log("Live =" + live);
+        //Debug.Log("Live =" + live);
     }
  
 

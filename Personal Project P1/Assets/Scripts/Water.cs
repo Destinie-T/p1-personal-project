@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
-    private int water;
+    private float water = 200f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +19,14 @@ public class Water : MonoBehaviour
     
     }
 
-    private void OnTriggerStay(Collider collider)
+    public void OnTriggerStay(Collider collider)
     {
 
         if (collider.CompareTag("Plant") && (Input.GetKey(KeyCode.Space)))
         {
             collider.gameObject.GetComponent<PlantGrowth>().Growth();
-            water--;
+            water -= Time.deltaTime;
+            Debug.Log("Water = " + water);
         }
 
     }

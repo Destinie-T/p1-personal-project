@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;                 //player's rigidbody
     public GameObject HoldCan;                  //The can in the game on the floor
-    
+
 
     private float speed = 10.0f;                //How fast the player moves
     private float turnSpeed = 120.0f;           //How fast the player turns
@@ -17,9 +17,7 @@ public class PlayerController : MonoBehaviour
     private float xRange = 19.0f;               //area on x-axis where player can move around
     private float zRange = 19.0f;               //area on z-axis where player can move around
 
-    public bool hasCan = false;
-
-    private int water = 100;
+    public bool hasCan;
 
     // Start is called before the first frame update
     void Start()
@@ -32,19 +30,6 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();                                   //Call MovePlayer void, way to keep update clean
         ConstrainPlayerPosition();                      //Call Constrain... so player doesn't fall
-       
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Can"))                    //Checks tag of object and if player doesn't have can
-        {
-            hasCan = true;                              //Player has can
-            Destroy(other.gameObject);                  //Destroy large can object
-
-            HoldCan.gameObject.SetActive(true);         //Minican is visible in-game
-            Debug.Log("Water = " + water);
-        }
     }
 
     // Up/down/left/right input to move
