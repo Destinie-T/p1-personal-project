@@ -13,8 +13,10 @@ public class GameManager : MonoBehaviour
     private GameObject plantGrowth;
     public GameObject startingTint;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI deathCounterText;
 
     public int countdownTimer = 60;
+    public int deadPlant;
 
 
     public bool isGameActive;
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        deadPlant = GameObject.FindGameObjectsWithTag("Dead").Length;
     }
     
     IEnumerator CountdownTimer()
@@ -47,6 +49,11 @@ public class GameManager : MonoBehaviour
             {
                 GameOver();
             }
+
+            if (deadPlant > 11)
+            {
+                GameOver();
+            }
         }
     }
 
@@ -57,6 +64,9 @@ public class GameManager : MonoBehaviour
         startingTint.gameObject.SetActive(true);
         GameObject.Find("Player").GetComponent<PlayerController>().enabled = false;
         GameObject.Find("Plant").GetComponent<PlantGrowth>().enabled = false;
+        deathCounterText.text = "Plants Dead: " + deadPlant;
+        Debug.Log(deadPlant);
+
     }
 
 

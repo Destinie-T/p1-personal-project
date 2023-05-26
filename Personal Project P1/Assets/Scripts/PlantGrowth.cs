@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlantGrowth : MonoBehaviour
 {
-    private float live = 30;
+    private float live = 40;
     private int nextUpdate = 3;
     public GameObject alivePlant;
     public GameObject grownPlant;
@@ -38,7 +38,7 @@ public class PlantGrowth : MonoBehaviour
         if(Time.time>=nextUpdate)                           //if next update is reached
         {
             //Debug.Log(Time.time+">="+nextUpdate);
-            nextUpdate = Mathf.FloorToInt(Time.time)+3;      //Change next update (current second + 5)
+            nextUpdate = Mathf.FloorToInt(Time.time)+1;      //Change next update (current second + 5)
             Decay();                                        //Call function
         }
 
@@ -53,9 +53,11 @@ public class PlantGrowth : MonoBehaviour
         
         if (live < 1)
         {
+            gameObject.tag = "Dead";
             alivePlant.gameObject.SetActive(false);
             deadPlant.gameObject.SetActive(true);
             live = -400;
+            
 
         } else if (live > overWatered)
         {
@@ -76,7 +78,7 @@ public class PlantGrowth : MonoBehaviour
     public void Decay()
     {
         live--;
-        //Debug.Log("Live =" + live);
+        Debug.Log("Live =" + live);
     }
  
 

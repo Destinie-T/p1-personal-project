@@ -29,6 +29,12 @@ public class Water : MonoBehaviour
             Debug.Log("Water = " + water);
         }
 
+        if (water < 0)
+        {
+            GameObject.Find("Plant").GetComponent<PlantGrowth>().enabled = false;
+            this.GetComponent<Water>().enabled = false;
+        }
+
     }
 
 
