@@ -38,10 +38,11 @@ public class PlantGrowth : MonoBehaviour
         if(Time.time>=nextUpdate)                           //if next update is reached
         {
             //Debug.Log(Time.time+">="+nextUpdate);
-            nextUpdate = Mathf.FloorToInt(Time.time)+1;      //Change next update (current second + 5)
-            Decay();                                        //Call function
+            nextUpdate = Mathf.FloorToInt(Time.time)+1;      //Change next update (current second + 1).. so every second
+            Decay();                                         //Call function
         }
 
+        //show or hide certain plant meshes depending on life it has
         if (live > goodLife)
         {  
             alivePlant.gameObject.SetActive(false);
@@ -70,15 +71,15 @@ public class PlantGrowth : MonoBehaviour
     
     public void Growth()
     {
-        live += 35f * Time.deltaTime;
-        Debug.Log("Live =" + live);
+        live += 35f * Time.deltaTime;                       //add to plant life every 35 frames (?)
+        //Debug.Log("Live =" + live);
     }
 
-    //Now called once per 3 second
+    //Now called once per 1 second
     public void Decay()
     {
-        live--;
-        Debug.Log("Live =" + live);
+        live--;                                             //subtract from plant life
+        //Debug.Log("Live =" + live);
     }
  
 

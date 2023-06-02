@@ -9,10 +9,9 @@ public class PlayerController : MonoBehaviour
 
 
     private float speed = 10.0f;                //How fast the player moves
-    private float turnSpeed = 120.0f;           //How fast the player turns
     
-    private float horizontalInput;              //Left/right input number to calculate
-    private float verticalInput;                //Up/down input to calculate
+    private float inputX;                       //Left/right input number to calculate
+    private float inputY;                       //Up/down input to calculate
 
     private float xRange = 19.0f;               //area on x-axis where player can move around
     private float zRange = 19.0f;               //area on z-axis where player can move around
@@ -28,18 +27,31 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        inputX = Input.GetAxis("Horizontal");
+        inputY = Input.GetAxis("Vertical");
+
+        RotatePlayer();                                 //Call RotatePlayer so player can turn
         MovePlayer();                                   //Call MovePlayer void, way to keep update clean
         ConstrainPlayerPosition();                      //Call Constrain... so player doesn't fall
     }
 
+    void RotatePlayer()
+    {
+        if (inputX != 0 || inputY != 0)
+        {
+            float rotationY = Mathf.Atan2(inputX, inputY) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0, rotationY, 0);
+        }
+
+    }
+    
     // Up/down/left/right input to move
     void MovePlayer()
-    {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+    { 
+        float input = Mathf.Sqrt(Mathf.Pow(inputX, 2) + Mathf.Pow(inputY, 2));
 
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);      //Move with up/down input
-        transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput);        //Turn with left/right input
+        transform.Translate(Vector3.forward * input * speed * Time.deltaTime);
 
     }
     

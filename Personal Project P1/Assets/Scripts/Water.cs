@@ -22,13 +22,14 @@ public class Water : MonoBehaviour
     public void OnTriggerStay(Collider collider)
     {
 
-        if (collider.CompareTag("Plant") && (Input.GetKey(KeyCode.Space)))
+        if (collider.CompareTag("Plant") && (Input.GetKey(KeyCode.Space)))          //hold down space key for interaction
         {
-            collider.gameObject.GetComponent<PlantGrowth>().Growth();
-            water -= Time.deltaTime;
-            Debug.Log("Water = " + water);
+            collider.gameObject.GetComponent<PlantGrowth>().Growth();               //access plant growth script and starts growth method to add to life value
+            water -= Time.deltaTime;                                                //rids of water over time with continual use
+            //Debug.Log("Water = " + water);
         }
 
+        //stops player from watering if there is no more water
         if (water < 0)
         {
             GameObject.Find("Plant").GetComponent<PlantGrowth>().enabled = false;
