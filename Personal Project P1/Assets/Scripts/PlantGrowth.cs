@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlantGrowth : MonoBehaviour
 {
-    private float live = 40;
+    [SerializeField] private float live;
     private int nextUpdate = 3;
     public GameObject alivePlant;
     public GameObject grownPlant;
@@ -20,6 +20,8 @@ public class PlantGrowth : MonoBehaviour
     void Start()
     {
        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+      
+       live = Random.Range(30, 50);
 
        //Debug.Log("Live = " + live);
     }
