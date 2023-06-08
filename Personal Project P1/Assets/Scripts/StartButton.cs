@@ -17,12 +17,6 @@ public class StartButton : MonoBehaviour
         button.onClick.AddListener(GameStart);                                          //listens for when button is clicked
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void GameStart()
     {
         gameManager.StartGame();                                                        //starts game when button is clicked
